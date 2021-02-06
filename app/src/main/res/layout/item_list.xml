@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/border_rect">
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="12.12.20"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="12:20"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/txtDate" />
+
+    <TextView
+        android:id="@+id/txtFoodStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Before Food"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/txtGlucoseValue"
+        app:layout_constraintStart_toEndOf="@+id/txtTime" />
+
+    <TextView
+        android:id="@+id/txtGlucoseValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="20.5"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent" />
+</android.widget.LinearLayout>
