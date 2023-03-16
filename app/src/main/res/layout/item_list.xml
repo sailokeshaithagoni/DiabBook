@@ -7,40 +7,68 @@
     android:orientation="horizontal"
     android:background="@drawable/border_rect">
 
-    <TextView
-        android:id="@+id/txtDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="12.12.20"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="12:20"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/txtDate" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/txtFoodStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Before Food"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/txtGlucoseValue"
-        app:layout_constraintStart_toEndOf="@+id/txtTime" />
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/txtGlucoseValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="20.5"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/date"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/time"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/txtDate" />
+
+            <TextView
+                android:id="@+id/txtMealStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/lunch"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/txtGlucoseValue"
+                app:layout_constraintStart_toEndOf="@+id/txtTime" />
+
+            <TextView
+                android:id="@+id/txtFoodStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/before_food"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/txtGlucoseValue"
+                app:layout_constraintStart_toEndOf="@+id/txtTime" />
+
+            <TextView
+                android:id="@+id/txtGlucoseValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/glucose_reading"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </TableRow>
+
+    </TableLayout>
+
 </android.widget.LinearLayout>

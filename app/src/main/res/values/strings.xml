@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">DiaBook</string>
-    <string name="title_home">Add Entry</string>
-    <string name="title_dashboard">History</string>
-    <string name="title_notifications">Menu</string>
+    <string name="title_add_entry">Add Entry</string>
+    <string name="title_history">History</string>
+    <string name="hour1">1 Hour</string>
+    <string name="hour2">2 Hours</string>
+    <string name="title_meal">MEAL</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="date">DD.MM.YY</string>
+    <string name="title_date">DATE</string>
+    <string name="time">HH:MM</string>
+    <string name="title_time">TIME</string>
+    <string name="before_food">Before Food</string>
+    <string name="after_food">After Food</string>
+    <string name="title_food">Food Status</string>
+    <string name="glucose_reading">95</string>
+    <string name="title_reading">Value</string>
+    <string name="your_glucose_reading">Your glucose reading</string>
+    <string name="add_Entry">ADD ENTRY</string>
+    <string name="title_settings">Settings</string>
+    <string name="heading_notification">Set Notification Timer</string>
+    <string name="title_update">Update</string>
+
 </resources>

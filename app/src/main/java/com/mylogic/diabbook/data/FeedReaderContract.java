@@ -12,7 +12,8 @@ public class FeedReaderContract {
         public static final String TABLE_NAME = "Glucose_Data";
         public static final String COLUMN_NAME1_TITLE = "Date";
         public static final String COLUMN_NAME2_TITLE = "Time";
-        public static final String COLUMN_NAME3_TITLE = "Food_Status";
-        public static final String COLUMN_NAME4_TITLE = "Glucose_reading";
+        public static final String COLUMN_NAME3_TITLE = "Meal_Status";
+        public static final String COLUMN_NAME4_TITLE = "Food_Status";
+        public static final String COLUMN_NAME5_TITLE = "Glucose_reading";
     }
 }

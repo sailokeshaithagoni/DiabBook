@@ -1,14 +1,35 @@
 package com.mylogic.diabbook.data;
 
 public class ModelGlucoseData {
+    private String _ID;
     private String txtDateVal;
     private String txtTimeVal;
+    private String txtMealStatusVal;
+
+    public String get_ID() {
+        return _ID;
+    }
+
+    public void set_ID(String _ID) {
+        this._ID = _ID;
+    }
+
     private String txtFoodStatusVal;
     private String txtGlucoseVal;
 
-    public ModelGlucoseData(String txtDateVal, String txtTimeVal, String txtFoodStatusVal, String txtGlucoseVal) {
+    public String getTxtMealStatusVal() {
+        return txtMealStatusVal;
+    }
+
+    public void setTxtMealStatusVal(String txtMealStatusVal) {
+        this.txtMealStatusVal = txtMealStatusVal;
+    }
+
+    public ModelGlucoseData(String _ID,String txtDateVal, String txtTimeVal, String txtMealStatusVal, String txtFoodStatusVal, String txtGlucoseVal) {
+        this._ID = _ID;
         this.txtGlucoseVal = txtGlucoseVal;
         this.txtTimeVal = txtTimeVal;
+        this.txtMealStatusVal = txtMealStatusVal;
         this.txtFoodStatusVal = txtFoodStatusVal;
         this.txtDateVal = txtDateVal;
     }

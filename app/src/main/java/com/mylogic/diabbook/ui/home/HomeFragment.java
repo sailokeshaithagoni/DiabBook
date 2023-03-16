@@ -22,10 +22,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mylogic.diabbook.MainActivity;
 import com.mylogic.diabbook.data.FeedReaderContract;
 import com.mylogic.diabbook.data.FeedReaderDbHelper;
@@ -44,9 +44,12 @@ import java.util.TimeZone;
 
 public class HomeFragment extends Fragment {
 
+//  Declaring variables
     private HomeViewModel homeViewModel;
     private RadioGroup radioFoodGroup;
     private RadioButton radioFoodButton;
+    private RadioGroup radioMealGroup;
+    private RadioButton radioMealButton;
     private EditText editTextNumberGlucose;
     private Button btnAdd;
     private List<ModelGlucoseData> listModelGlucoseData;
@@ -55,14 +58,20 @@ public class HomeFragment extends Fragment {
     private Notification notification;
     public NotificationManager notificationManager;
     private static final String TAG = HomeFragment.class.getSimpleName();
+    private RadioGroup radioNotificationsGroup;
+    private Long notificationTimer;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+//      Binding declared variables with Views
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         btnAdd=root.findViewById(R.id.btnAdd);
-        radioFoodGroup = (RadioGroup) root.findViewById(R.id.radioGroup);
+        radioFoodGroup = (RadioGroup) root.findViewById(R.id.radioFoodTypGroup);
+        radioNotificationsGroup = (RadioGroup) root.findViewById(R.id.radioNotificationsGroup);
+        radioMealGroup = (RadioGroup) root.findViewById(R.id.radioMealTypGroup);
         editTextNumberGlucose=root.findViewById(R.id.editTextNumberGlucose);
         listModelGlucoseData=new ArrayList<>();
 
@@ -75,15 +84,17 @@ public class HomeFragment extends Fragment {
                 Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+1:00"));
                 Date currentLocalTime = cal.getTime();
                 DateFormat date = new SimpleDateFormat("HH:mm");
-                // you can get seconds by adding  "...:ss" to it
                 date.setTimeZone(TimeZone.getTimeZone("GMT+1:00"));
                 String localTime = date.format(currentLocalTime);
 
                 SimpleDateFormat df = new SimpleDateFormat("dd.MM.yy", Locale.getDefault());
                 String formattedDate = df.format(currentLocalTime);
 
-                int selectedId = radioFoodGroup.getCheckedRadioButtonId();
-                radioFoodButton=(RadioButton)radioFoodGroup.findViewById(selectedId);
+                int foodId = radioFoodGroup.getCheckedRadioButtonId();
+                radioFoodButton=(RadioButton)radioFoodGroup.findViewById(foodId);
+                int mealId = radioMealGroup.getCheckedRadioButtonId();
+                radioMealButton=(RadioButton)radioMealGroup.findViewById(mealId);
+                int notificationId = radioNotificationsGroup.getCheckedRadioButtonId();
                 ContentValues values = new ContentValues();
                 if(radioFoodButton!=null)
                 {
@@ -95,27 +106,28 @@ public class HomeFragment extends Fragment {
                     {
                         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME1_TITLE, formattedDate);
                         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME2_TITLE, localTime);
-                        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME3_TITLE, radioFoodButton.getText().toString());
+                        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME3_TITLE, radioMealButton.getText().toString());
+                        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME4_TITLE, radioFoodButton.getText().toString());
 
-                        if(radioFoodButton.getText().length()==11)
-                        {
-                            new CountDownTimer(7200000,1000) {
-                                @Override
-                                public void onTick(long millisUntilFinished) {
-                                    //counttime.setText(String.valueOf(counter));
-                                    counter++;
-                                }
-                                @Override
-                                public void onFinish() {
-                                    createNotification();
-                                }
-                            }.start();
+                        long hrs_2=7200000;
+                        long hrs_1=3600000;
+                        //long min_1=60000;
+
+                        if(notificationId==2131230898){
+                            notificationTimer=hrs_1;
+                            setNotificationTimer();
                         }
-
-                        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME4_TITLE, editTextNumberGlucose.getText().toString());
+                        else if(notificationId==2131230899){
+                            notificationTimer=hrs_2;
+                            setNotificationTimer();
+                        }
+                        else {
+                            Toast.makeText(getContext(),"No Notification Set!",Toast.LENGTH_SHORT).show();
+                        }
+                        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME5_TITLE, editTextNumberGlucose.getText().toString());
 
                         long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
-                        Toast.makeText(getContext(),"Glucose reading added successfully",Toast.LENGTH_SHORT).show();
+                        Snackbar.make(v, "Glucose reading added successfully", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                     }
                 }
                 else {
@@ -124,6 +136,20 @@ public class HomeFragment extends Fragment {
             }
         });
         return root;
+    }
+    private void setNotificationTimer()
+    {
+        new CountDownTimer(notificationTimer,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                //Toast.makeText(getContext(),"Secs left for Notification : "+millisUntilFinished/1000,Toast.LENGTH_SHORT).show();
+                counter++;
+            }
+            @Override
+            public void onFinish() {
+                createNotification();
+            }
+        }.start();
     }
 
     public void createNotification()
