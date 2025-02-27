@@ -1,6 +1,6 @@
 # DiabBook
 
-Basic application for logging your blood sugar levels.
+Basic application for logging blood sugar levels.
 
 No need to enter any user data.
 Your sugar levels will be logged in your local.
